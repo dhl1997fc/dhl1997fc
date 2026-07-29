@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f5f6f8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="记账台">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <title>记账台 · 个人理财工作台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-logo">¥</div>
+      <div>
+        <h1 class="header-title">记账台</h1>
+        <div class="header-sub" id="today-label"></div>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" id="btn-export" title="导出">↓</button>
+      <button class="icon-btn" id="btn-import" title="导入">↑</button>
+      <input type="file" id="file-import" accept=".json" hidden>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- 1. 本月概览 -->
+    <section class="overview-card">
+      <div class="overview-top">
+        <div class="overview-label">本月结余</div>
+        <div class="overview-balance" id="ov-balance">¥0.00</div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-item income">
+          <div class="ov-dot income"></div>
+          <div>
+            <div class="ov-num" id="ov-income">¥0</div>
+            <div class="ov-cap">收入</div>
+          </div>
+        </div>
+        <div class="overview-item expense">
+          <div class="ov-dot expense"></div>
+          <div>
+            <div class="ov-num" id="ov-expense">¥0</div>
+            <div class="ov-cap">支出</div>
+          </div>
+        </div>
+      </div>
+      <!-- 预算进度 -->
+      <div class="budget-bar-wrap">
+        <div class="budget-bar-head">
+          <span class="budget-cap">月度预算</span>
+          <span class="budget-val" id="budget-text">¥0 / ¥0</span>
+        </div>
+        <div class="budget-bar">
+          <div class="budget-fill" id="budget-fill"></div>
+        </div>
+        <div class="budget-warn" id="budget-warn" hidden>⚠️ 已超支，注意控制开销</div>
+      </div>
+    </section>
+
+    <!-- 快速操作 -->
+    <section class="quick-row">
+      <button class="quick-btn primary" id="btn-quick-add">
+        <span class="quick-ico">＋</span>
+        <span>记一笔</span>
+      </button>
+      <button class="quick-btn" data-page="trend">
+        <span class="quick-ico">📈</span>
+        <span>趋势</span>
+      </button>
+      <button class="quick-btn" data-page="plan">
+        <span class="quick-ico">🔔</span>
+        <span>计划</span>
+      </button>
+      <button class="quick-btn" data-page="budget">
+        <span class="quick-ico">🎯</span>
+        <span>预算</span>
+      </button>
+    </section>
+
+    <!-- 2. 分类统计 + 3. 资产总览 (两列) -->
+    <div class="grid-2">
+      <section class="card">
+        <div class="card-head">
+          <span class="card-title">分类统计</span>
+          <span class="card-extra" id="cat-month">本月</span>
+        </div>
+        <div class="pie-wrap">
+          <canvas id="pie" width="160" height="160"></canvas>
+          <div class="pie-center">
+            <div class="pie-center-num" id="pie-total">¥0</div>
+            <div class="pie-center-cap">支出</div>
+          </div>
+        </div>
+        <div class="legend" id="pie-legend"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="card-title">资产总览</span>
+          <span class="card-extra" id="asset-date"></span>
+        </div>
+        <div class="asset-net" id="asset-net">¥0</div>
+        <div class="asset-net-cap">净资产</div>
+        <div class="asset-row">
+          <div class="asset-col">
+            <div class="asset-num asset-in" id="asset-total">¥0</div>
+            <div class="asset-cap">总资产</div>
+          </div>
+          <div class="asset-col">
+            <div class="asset-num asset-out" id="liability-total">¥0</div>
+            <div class="asset-cap">总负债</div>
+          </div>
+        </div>
+        <div class="account-list" id="account-list"></div>
+      </section>
+    </div>
+
+    <!-- 3.5 存钱目标 -->
+    <section class="card">
+      <div class="card-head">
+        <span class="card-title">💰 存钱目标</span>
+        <button class="card-link" data-page="goal">管理</button>
+      </div>
+      <div class="goal-list" id="goal-list"></div>
+    </section>
+
+    <!-- 4. 趋势报表 -->
+    <section class="card">
+      <div class="card-head">
+        <span class="card-title">收支趋势</span>
+        <span class="card-extra">近 6 个月</span>
+      </div>
+      <div class="trend-wrap">
+        <canvas id="trend" width="640" height="200"></canvas>
+      </div>
+      <div class="trend-legend">
+        <span class="trend-tag income">收入</span>
+        <span class="trend-tag expense">支出</span>
+      </div>
+    </section>
+
+    <!-- 5. 周期计划 -->
+    <section class="card">
+      <div class="card-head">
+        <span class="card-title">周期计划</span>
+        <button class="card-link" data-page="plan">管理</button>
+      </div>
+      <div class="plan-list" id="plan-list"></div>
+    </section>
+
+    <!-- 6. 最近账单 -->
+    <section class="card">
+      <div class="card-head">
+        <span class="card-title">最近账单</span>
+        <button class="card-link" data-page="bills">全部</button>
+      </div>
+      <div class="bill-list" id="bill-list"></div>
+    </section>
+
+    <footer class="app-footer">数据保存在本机浏览器 · 定期导出备份更安全</footer>
+  </main>
+
+  <!-- ===== 记一笔弹窗 ===== -->
+  <div class="sheet-mask" id="mask" hidden></div>
+
+  <div class="sheet" id="sheet-add" hidden>
+    <div class="sheet-grip"></div>
+    <h3 class="sheet-title">记一笔</h3>
+
+    <div class="type-tabs">
+      <button class="type-tab active" data-type="expense">支出</button>
+      <button class="type-tab" data-type="income">收入</button>
+      <button class="type-tab" data-type="transfer">转账</button>
+    </div>
+
+    <div class="field">
+      <label class="field-label">金额</label>
+      <div class="amount-input">
+        <span class="amount-sym">¥</span>
+        <input type="number" id="f-amount" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+      </div>
+    </div>
+
+    <div class="field" id="field-category">
+      <label class="field-label">分类</label>
+      <div class="cat-chips" id="cat-chips"></div>
+    </div>
+
+    <div class="field" id="field-account">
+      <label class="field-label">账户</label>
+      <select id="f-account" class="select"></select>
+    </div>
+
+    <div class="field" id="field-to" hidden>
+      <label class="field-label">转入账户</label>
+      <select id="f-to-account" class="select"></select>
+    </div>
+
+    <div class="field">
+      <label class="field-label">备注</label>
+      <input type="text" id="f-note" placeholder="选填，如：午餐、打车...">
+    </div>
+
+    <div class="field">
+      <label class="field-label">日期</label>
+      <input type="date" id="f-date" class="select">
+    </div>
+
+    <div class="field">
+      <label class="field-label">小票 <span class="opt">(选填)</span></label>
+      <div class="receipt-row">
+        <label class="receipt-pick">
+          <input type="file" id="f-receipt" accept="image/*" hidden>
+          <span id="receipt-label">📷 上传小票</span>
+        </label>
+        <div class="receipt-preview" id="receipt-preview" hidden>
+          <img id="receipt-img" alt="小票">
+          <button class="receipt-del" id="receipt-del">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-block primary" id="btn-save-bill">保存</button>
+  </div>
+
+  <!-- 账单全部 -->
+  <div class="sheet" id="sheet-bills" hidden>
+    <div class="sheet-grip"></div>
+    <h3 class="sheet-title">全部账单</h3>
+    <div class="filter-row">
+      <button class="filter-chip active" data-f="all">全部</button>
+      <button class="filter-chip" data-f="expense">支出</button>
+      <button class="filter-chip" data-f="income">收入</button>
+      <button class="filter-chip" data-f="transfer">转账</button>
+    </div>
+    <div class="bill-list tall" id="bills-all"></div>
+  </div>
+
+  <!-- 趋势 -->
+  <div class="sheet" id="sheet-trend" hidden>
+    <div class="sheet-grip"></div>
+    <h3 class="sheet-title">收支趋势</h3>
+    <div class="trend-wrap big">
+      <canvas id="trend-big" width="640" height="320"></canvas>
+    </div>
+    <div class="trend-legend center">
+      <span class="trend-tag income">收入</span>
+      <span class="trend-tag expense">支出</span>
+      <span class="trend-tag net">结余</span>
+    </div>
+    <div class="month-table" id="month-table"></div>
+  </div>
+
+  <!-- 计划 -->
+  <div class="sheet" id="sheet-plan" hidden>
+    <div class="sheet-grip"></div>
+    <h3 class="sheet-title">周期计划</h3>
+    <p class="sheet-tip">设置工资、房租等固定收支，到时提醒</p>
+    <div class="plan-list" id="plan-all"></div>
+    <div class="plan-add">
+      <select id="plan-type" class="select">
+        <option value="income">收入</option>
+        <option value="expense">支出</option>
+      </select>
+      <input type="text" id="plan-name" placeholder="名称，如 房租">
+      <input type="number" id="plan-amount" placeholder="金额" min="0">
+      <select id="plan-cycle" class="select">
+        <option value="monthly">每月</option>
+        <option value="weekly">每周</option>
+        <option value="yearly">每年</option>
+      </select>
+      <button class="btn-block primary" id="btn-add-plan">添加计划</button>
+    </div>
+  </div>
+
+  <!-- 预算 -->
+  <div class="sheet" id="sheet-budget" hidden>
+    <div class="sheet-grip"></div>
+    <h3 class="sheet-title">预算管控</h3>
+    <div class="field">
+      <label class="field-label">月度预算 (¥)</label>
+      <input type="number" id="budget-input" placeholder="设置本月预算" min="0">
+    </div>
+    <div class="budget-bar-wrap">
+      <div class="budget-bar">
+        <div class="budget-fill" id="budget-fill2"></div>
+      </div>
+      <div class="budget-bar-head">
+        <span class="budget-cap" id="budget-used">已用 ¥0</span>
+        <span class="budget-val" id="budget-left">剩余 ¥0</span>
+      </div>
+    </div>
+    <button class="btn-block primary" id="btn-save-budget">保存预算</button>
+    <div class="cat-budget-list" id="cat-budget-list"></div>
+  </div>
+
+  <!-- 账户管理 -->
+  <div class="sheet" id="sheet-accounts" hidden>
+    <div class="sheet-grip"></div>
+    <h3 class="sheet-title">账户管理</h3>
+    <div class="account-edit-list" id="account-edit-list"></div>
+    <div class="account-add">
+      <input type="text" id="acc-name" placeholder="账户名，如 微信钱包">
+      <select id="acc-type" class="select">
+        <option value="asset">资产</option>
+        <option value="liability">负债</option>
+      </select>
+      <input type="number" id="acc-balance" placeholder="余额" step="0.01">
+      <button class="btn-block primary" id="btn-add-account">添加账户</button>
+    </div>
+  </div>
+
+  <button class="fab" id="fab-add" title="记一笔">＋</button>
+
+  <!-- 存钱目标管理 -->
+  <div class="sheet" id="sheet-goal" hidden>
+    <div class="sheet-grip"></div>
+    <h3 class="sheet-title">存钱目标</h3>
+    <div class="bill-list tall" id="goal-all"></div>
+    <button class="btn-block primary" id="btn-add-goal">＋ 新增目标</button>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="app.js"></script>
+  <script src="register-sw.js"></script>
+</body>
+</html>
