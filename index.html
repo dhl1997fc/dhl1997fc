@@ -34,7 +34,7 @@
     <!-- 1. 本月概览 -->
     <section class="overview-card">
       <div class="overview-top">
-        <div class="overview-label">本月结余</div>
+        <div class="overview-label"><i class="mod-no light">1</i>本月结余</div>
         <div class="overview-balance" id="ov-balance">¥0.00</div>
       </div>
       <div class="overview-row">
@@ -66,11 +66,15 @@
       </div>
     </section>
 
-    <!-- 快速操作 -->
+    <!-- 功能导航 -->
     <section class="quick-row">
       <button class="quick-btn primary" id="btn-quick-add">
         <span class="quick-ico">＋</span>
         <span>记一笔</span>
+      </button>
+      <button class="quick-btn" data-page="bills">
+        <span class="quick-ico">📋</span>
+        <span>账单</span>
       </button>
       <button class="quick-btn" data-page="trend">
         <span class="quick-ico">📈</span>
@@ -84,13 +88,25 @@
         <span class="quick-ico">🎯</span>
         <span>预算</span>
       </button>
+      <button class="quick-btn" data-page="goal">
+        <span class="quick-ico">💰</span>
+        <span>目标</span>
+      </button>
+      <button class="quick-btn" data-page="accounts" id="btn-accounts">
+        <span class="quick-ico">🏦</span>
+        <span>账户</span>
+      </button>
+      <button class="quick-btn" id="btn-export2">
+        <span class="quick-ico">📤</span>
+        <span>备份</span>
+      </button>
     </section>
 
     <!-- 2. 分类统计 + 3. 资产总览 (两列) -->
     <div class="grid-2">
       <section class="card">
         <div class="card-head">
-          <span class="card-title">分类统计</span>
+          <span class="card-title"><i class="mod-no">2</i>分类统计</span>
           <span class="card-extra" id="cat-month">本月</span>
         </div>
         <div class="pie-wrap">
@@ -105,7 +121,7 @@
 
       <section class="card">
         <div class="card-head">
-          <span class="card-title">资产总览</span>
+          <span class="card-title"><i class="mod-no">3</i>资产总览</span>
           <span class="card-extra" id="asset-date"></span>
         </div>
         <div class="asset-net" id="asset-net">¥0</div>
@@ -127,7 +143,7 @@
     <!-- 3.5 存钱目标 -->
     <section class="card">
       <div class="card-head">
-        <span class="card-title">💰 存钱目标</span>
+        <span class="card-title"><i class="mod-no">4</i>💰 存钱目标</span>
         <button class="card-link" data-page="goal">管理</button>
       </div>
       <div class="goal-list" id="goal-list"></div>
@@ -136,7 +152,7 @@
     <!-- 4. 趋势报表 -->
     <section class="card">
       <div class="card-head">
-        <span class="card-title">收支趋势</span>
+        <span class="card-title"><i class="mod-no">5</i>收支趋势</span>
         <span class="card-extra">近 6 个月</span>
       </div>
       <div class="trend-wrap">
@@ -151,7 +167,7 @@
     <!-- 5. 周期计划 -->
     <section class="card">
       <div class="card-head">
-        <span class="card-title">周期计划</span>
+        <span class="card-title"><i class="mod-no">6</i>周期计划</span>
         <button class="card-link" data-page="plan">管理</button>
       </div>
       <div class="plan-list" id="plan-list"></div>
@@ -160,7 +176,7 @@
     <!-- 6. 最近账单 -->
     <section class="card">
       <div class="card-head">
-        <span class="card-title">最近账单</span>
+        <span class="card-title"><i class="mod-no">7</i>最近账单</span>
         <button class="card-link" data-page="bills">全部</button>
       </div>
       <div class="bill-list" id="bill-list"></div>
@@ -285,7 +301,7 @@
   <!-- 预算 -->
   <div class="sheet" id="sheet-budget" hidden>
     <div class="sheet-grip"></div>
-    <h3 class="sheet-title">预算管控</h3>
+    <h3 class="sheet-title"><i class="mod-no">8</i>预算管控</h3>
     <div class="field">
       <label class="field-label">月度预算 (¥)</label>
       <input type="number" id="budget-input" placeholder="设置本月预算" min="0">

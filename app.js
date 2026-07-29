@@ -829,6 +829,7 @@
   function bind() {
     // 顶部
     $('#btn-export').addEventListener('click', exportData);
+    $('#btn-export2').addEventListener('click', exportData);
     $('#btn-import').addEventListener('click', () => $('#file-import').click());
     $('#file-import').addEventListener('change', e => {
       if (e.target.files[0]) importData(e.target.files[0]);
