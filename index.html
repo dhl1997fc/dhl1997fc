@@ -14,10 +14,77 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- ===== 可爱风 SVG 图标 sprite ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="ic-logo" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 8.5c0-1.4 1.1-2.5 2.5-2.5h13c1.4 0 2.5 1.1 2.5 2.5v9c0 1.4-1.1 2.5-2.5 2.5h-13C4.1 20 3 18.9 3 17.5z"/>
+        <path d="M3 8.5h18"/>
+        <circle cx="12" cy="13" r="2.4" fill="currentColor" stroke="none"/>
+      </g>
+      <g id="ic-add" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="8.5"/>
+        <path d="M12 8v8M8 12h8"/>
+      </g>
+      <g id="ic-bills" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="3.5" width="14" height="17" rx="3"/>
+        <path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>
+      </g>
+      <g id="ic-trend" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 16l4.5-4.5 3.5 3 4-5 4.5 5.5"/>
+        <path d="M4 4.5h16"/>
+      </g>
+      <g id="ic-plan" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 9a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6z"/>
+        <path d="M10 20a2 2 0 0 0 4 0"/>
+      </g>
+      <g id="ic-budget" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="8.5"/>
+        <circle cx="12" cy="12" r="4.5"/>
+        <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/>
+      </g>
+      <g id="ic-goal" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 13c0-3.9 3.1-7 7-7 2 0 3.5.6 4.8 1.7"/>
+        <path d="M19 11c0 3.9-3.1 7-7 7-1.6 0-3-.5-4.2-1.4"/>
+        <circle cx="9" cy="13" r="1.1" fill="currentColor" stroke="none"/>
+        <path d="M4 12h1.6M18.4 12H20"/>
+      </g>
+      <g id="ic-account" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="6" width="17" height="12" rx="3"/>
+        <path d="M3.5 10h17"/>
+        <circle cx="16.5" cy="14" r="1.4" fill="currentColor" stroke="none"/>
+      </g>
+      <g id="ic-backup" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v9"/>
+        <path d="M8.5 8.5L12 12l3.5-3.5"/>
+        <path d="M5 14v3.5c0 1 1 2 2 2h10c1 0 2-1 2-2V14"/>
+      </g>
+      <g id="ic-pig" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 13c-1.2 0-2-1-2-2.2 0-1 .8-1.8 1.8-1.8.3 0 .6 0 .9.1"/>
+        <path d="M7.7 9c1-3 4-4.5 7-3.6 3 .9 4.3 3.6 3.4 6.4-.7 2.2-2.8 3.7-5.4 3.7-2.4 0-4.4-1.1-5.4-3"/>
+        <circle cx="13.4" cy="11.6" r="1.1" fill="currentColor" stroke="none"/>
+        <path d="M17.7 11.5c1.3-.4 2.3.3 2.3 1.6 0 1.5-1.4 2.4-3 2.2"/>
+        <path d="M9.6 13.6c0 1.4-1 2.3-2.2 2.1"/>
+      </g>
+      <g id="ic-camera" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 8.5c0-1 .8-1.8 1.8-1.8h2L8.6 6h6.8l.8 1.7h2c1 0 1.8.8 1.8 1.8v8.2c0 1-.8 1.8-1.8 1.8H5.8C4.8 19.5 4 18.7 4 17.7z"/>
+        <circle cx="12" cy="13" r="3.2"/>
+      </g>
+      <g id="ic-close" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <path d="M7 7l10 10M17 7L7 17"/>
+      </g>
+      <g id="ic-warn" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3.5l9 15.5H3z"/>
+        <path d="M12 10v4.5"/>
+        <circle cx="12" cy="17.2" r="1" fill="currentColor" stroke="none"/>
+      </g>
+    </defs>
+  </svg>
+
   <!-- 顶部导航 -->
   <header class="app-header">
     <div class="header-left">
-      <div class="brand-logo">¥</div>
+      <div class="brand-logo"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-logo"/></svg></div>
       <div>
         <h1 class="header-title">记账台</h1>
         <div class="header-sub" id="today-label"></div>
@@ -62,42 +129,42 @@
         <div class="budget-bar">
           <div class="budget-fill" id="budget-fill"></div>
         </div>
-        <div class="budget-warn" id="budget-warn" hidden>⚠️ 已超支，注意控制开销</div>
+        <div class="budget-warn" id="budget-warn" hidden><svg class="ic ic-inline" viewBox="0 0 24 24"><use href="#ic-warn"/></svg> 已超支，注意控制开销</div>
       </div>
     </section>
 
     <!-- 功能导航 -->
     <section class="quick-row">
       <button class="quick-btn primary" id="btn-quick-add">
-        <span class="quick-ico">＋</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-add"/></svg></span>
         <span>记一笔</span>
       </button>
       <button class="quick-btn" data-page="bills">
-        <span class="quick-ico">📋</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-bills"/></svg></span>
         <span>账单</span>
       </button>
       <button class="quick-btn" data-page="trend">
-        <span class="quick-ico">📈</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-trend"/></svg></span>
         <span>趋势</span>
       </button>
       <button class="quick-btn" data-page="plan">
-        <span class="quick-ico">🔔</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-plan"/></svg></span>
         <span>计划</span>
       </button>
       <button class="quick-btn" data-page="budget">
-        <span class="quick-ico">🎯</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-budget"/></svg></span>
         <span>预算</span>
       </button>
       <button class="quick-btn" data-page="goal">
-        <span class="quick-ico">💰</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-goal"/></svg></span>
         <span>目标</span>
       </button>
       <button class="quick-btn" data-page="accounts" id="btn-accounts">
-        <span class="quick-ico">🏦</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-account"/></svg></span>
         <span>账户</span>
       </button>
       <button class="quick-btn" id="btn-export2">
-        <span class="quick-ico">📤</span>
+        <span class="quick-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-backup"/></svg></span>
         <span>备份</span>
       </button>
     </section>
@@ -143,7 +210,7 @@
     <!-- 3.5 存钱目标 -->
     <section class="card">
       <div class="card-head">
-        <span class="card-title"><i class="mod-no">4</i>💰 存钱目标</span>
+        <span class="card-title"><i class="mod-no">4</i><svg class="ic ic-inline" viewBox="0 0 24 24"><use href="#ic-pig"/></svg> 存钱目标</span>
         <button class="card-link" data-page="goal">管理</button>
       </div>
       <div class="goal-list" id="goal-list"></div>
@@ -189,7 +256,7 @@
   <div class="sheet-mask" id="mask" hidden></div>
 
   <div class="sheet drawer" id="sheet-add" hidden>
-    <button class="drawer-close" id="drawer-add-close" aria-label="关闭">✕</button>
+    <button class="drawer-close" id="drawer-add-close" aria-label="关闭"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-close"/></svg></button>
     <h3 class="sheet-title">记一笔</h3>
 
     <div class="type-tabs">
@@ -236,11 +303,11 @@
       <div class="receipt-row">
         <label class="receipt-pick">
           <input type="file" id="f-receipt" accept="image/*" hidden>
-          <span id="receipt-label">📷 上传小票</span>
+          <span id="receipt-label"><svg class="ic ic-inline" viewBox="0 0 24 24"><use href="#ic-camera"/></svg> 上传小票</span>
         </label>
         <div class="receipt-preview" id="receipt-preview" hidden>
           <img id="receipt-img" alt="小票">
-          <button class="receipt-del" id="receipt-del">✕</button>
+          <button class="receipt-del" id="receipt-del"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-close"/></svg></button>
         </div>
       </div>
     </div>
@@ -335,14 +402,14 @@
     </div>
   </div>
 
-  <button class="fab" id="fab-add" title="记一笔">＋</button>
+  <button class="fab" id="fab-add" title="记一笔"><svg class="ic" viewBox="0 0 24 24"><use href="#ic-add"/></svg></button>
 
   <!-- 存钱目标管理 -->
   <div class="sheet" id="sheet-goal" hidden>
     <div class="sheet-grip"></div>
     <h3 class="sheet-title">存钱目标</h3>
     <div class="bill-list tall" id="goal-all"></div>
-    <button class="btn-block primary" id="btn-add-goal">＋ 新增目标</button>
+    <button class="btn-block primary" id="btn-add-goal"><svg class="ic ic-inline" viewBox="0 0 24 24"><use href="#ic-add"/></svg> 新增目标</button>
   </div>
 
   <div class="toast" id="toast" hidden></div>
