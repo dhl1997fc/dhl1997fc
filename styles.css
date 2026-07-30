@@ -391,21 +391,21 @@ body { padding-bottom: 90px; }
   animation: slideUp 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== 记一笔 · 右侧抽屉 ===== */
+/* ===== 记一笔 · 左侧抽屉 ===== */
 .sheet.drawer {
   top: 0; bottom: 0;
-  left: auto; right: 0;
+  left: 0; right: auto;
   transform: none;
   width: min(420px, 88vw);
   max-width: 420px;
   border-radius: 0;
-  border-top-left-radius: 28px;
-  border-bottom-left-radius: 28px;
+  border-top-right-radius: 28px;
+  border-bottom-right-radius: 28px;
   padding: 22px 22px max(22px, env(safe-area-inset-bottom));
   max-height: 100vh;
   background: linear-gradient(160deg, #fffafd 0%, #fff4fa 100%);
-  box-shadow: -12px 0 40px rgba(255, 126, 179, 0.22);
-  animation: slideInRight 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 12px 0 40px rgba(255, 126, 179, 0.22);
+  animation: slideInLeft 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .sheet.drawer .field-label { color: var(--accent); }
 .sheet.drawer .sheet-grip { display: none; }
@@ -425,8 +425,8 @@ body { padding-bottom: 90px; }
 }
 .drawer-close:active { transform: scale(0.9); background: var(--line-strong); }
 
-@keyframes slideInRight {
-  from { transform: translateX(100%); opacity: 0.6; }
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0.6; }
   to   { transform: translateX(0); opacity: 1; }
 }
 
