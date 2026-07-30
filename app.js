@@ -7,25 +7,25 @@
   // 分类定义
   const CATEGORIES = {
     expense: [
-      { id: 'food', name: '餐饮', emoji: '🍜', color: '#f97316' },
-      { id: 'transport', name: '通勤', emoji: '🚌', color: '#0ea5e9' },
-      { id: 'shopping', name: '购物', emoji: '🛍️', color: '#ec4899' },
-      { id: 'fun', name: '娱乐', emoji: '🎮', color: '#8b5cf6' },
-      { id: 'home', name: '居家', emoji: '🏠', color: '#14b8a6' },
-      { id: 'medical', name: '医疗', emoji: '💊', color: '#ef4444' },
-      { id: 'study', name: '学习', emoji: '📚', color: '#3b82f6' },
-      { id: 'social', name: '社交', emoji: '🎁', color: '#f59e0b' },
-      { id: 'other_e', name: '其他', emoji: '📦', color: '#94a3b8' },
+      { id: 'food', name: '餐饮', emoji: '🍜', color: '#ff9ec7' },
+      { id: 'transport', name: '通勤', emoji: '🚌', color: '#7ec8ff' },
+      { id: 'shopping', name: '购物', emoji: '🛍️', color: '#ff7eb3' },
+      { id: 'fun', name: '娱乐', emoji: '🎮', color: '#b18cff' },
+      { id: 'home', name: '居家', emoji: '🏠', color: '#5fc7b8' },
+      { id: 'medical', name: '医疗', emoji: '💊', color: '#ff8fa3' },
+      { id: 'study', name: '学习', emoji: '📚', color: '#9aa8ff' },
+      { id: 'social', name: '社交', emoji: '🎁', color: '#ffc15e' },
+      { id: 'other_e', name: '其他', emoji: '📦', color: '#d3a0c4' },
     ],
     income: [
-      { id: 'salary', name: '工资', emoji: '💰', color: '#16a34a' },
-      { id: 'bonus', name: '奖金', emoji: '🎉', color: '#22c55e' },
-      { id: 'invest', name: '理财', emoji: '📈', color: '#10b981' },
-      { id: 'parttime', name: '兼职', emoji: '💼', color: '#84cc16' },
-      { id: 'other_i', name: '其他', emoji: '📦', color: '#94a3b8' },
+      { id: 'salary', name: '工资', emoji: '💰', color: '#5fc7b8' },
+      { id: 'bonus', name: '奖金', emoji: '🎉', color: '#7ee0d0' },
+      { id: 'invest', name: '理财', emoji: '📈', color: '#8fd4c9' },
+      { id: 'parttime', name: '兼职', emoji: '💼', color: '#a6e3d8' },
+      { id: 'other_i', name: '其他', emoji: '📦', color: '#d3a0c4' },
     ],
     transfer: [
-      { id: 'transfer', name: '转账', emoji: '🔄', color: '#8b5cf6' },
+      { id: 'transfer', name: '转账', emoji: '🔄', color: '#b18cff' },
     ],
   };
 
@@ -643,9 +643,9 @@
         }
       });
     }
-    line('income', '#16a34a');
-    line('expense', '#ef4444');
-    if (big) line('balance', '#3b82f6');
+    line('income', '#5fc7b8');
+    line('expense', '#ff7eb3');
+    if (big) line('balance', '#b18cff');
   }
 
   // ===== 弹窗 =====
@@ -840,6 +840,7 @@
     $('#btn-quick-add').addEventListener('click', () => openSheet('add'));
     $('#fab-add').addEventListener('click', () => openSheet('add'));
     $('#mask').addEventListener('click', closeSheet);
+    $('#drawer-add-close').addEventListener('click', closeSheet);
 
     // 类型切换
     $$('.type-tab').forEach(t => {
